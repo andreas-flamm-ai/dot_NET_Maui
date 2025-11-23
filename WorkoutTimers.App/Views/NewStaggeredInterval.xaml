@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WorkoutTimers.App.Views.NewStaggeredInterval"
+             Title="New Staggered Interval"
+             xmlns:lib="clr-namespace:WorkoutTimers.Lib.ViewModels;assembly=WorkoutTimers.Lib"
+             x:DataType="{x:Type lib:NewStaggeredIntervalModel}"
+             xmlns:converters="clr-namespace:WorkoutTimers.App.Converters"
+             >
+   <!-- replace flex layout with grid
+        Add, Entry elements for name, repetitions
+    -->
+    <Grid Margin="5" RowSpacing="5">
+        <Grid.Resources>
+            <converters:TimeSpanConverter x:Key="durationConverter" />
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        
+        <Label Text="Name:"/> <!-- add entry -->
+        <Entry Text="{Binding Model.Name, Mode=TwoWay}" Grid.Column="1" Placeholder="Name" />
+        
+        <Label Text="Repetitions:" Grid.Row="1" />   <!-- add entry -->
+        <Entry Text="{Binding Model.Repetitions, Mode=TwoWay}" Style="{StaticResource Key=numberEntry}" Grid.Column="1" Grid.Row="1" Placeholder="Repetitions" /> 
+        
+        <Label Text="Durations:" Grid.Row="2" />
+        <Border Stroke="Grey" Grid.Row="3" Grid.ColumnSpan="2">
+            <CollectionView ItemsSource="{Binding Model.Durations}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type lib:IntervalDuration}">
+                        <Entry Placeholder="00:00" 
+                               Text="{Binding Path=Duration, Mode=TwoWay, Converter={StaticResource Key=durationConverter}, ConverterParameter='mm\\:ss'}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
+
+        <Button Text="Add Duration" Command="{Binding NewDurationCommand}" Grid.ColumnSpan="2" Grid.Row="4" HorizontalOptions="Center" />
+        <Button Text="Save" Command="{Binding SaveIntervalCommand}" Grid.ColumnSpan="2" Grid.Row="5" HorizontalOptions="Center" /> 
+    </Grid>
+</ContentPage>

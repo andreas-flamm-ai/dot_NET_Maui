@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WorkoutTimers.App.Views.RunInterval"
+             Title="Run Interval">
+    <AbsoluteLayout>
+        <Button Text="Start" AbsoluteLayout.LayoutBounds="4,4, .25, 50" AbsoluteLayout.LayoutFlags="WidthProportional" />
+        <Button Text="Stop" AbsoluteLayout.LayoutBounds="104,4, .25, 50" AbsoluteLayout.LayoutFlags="WidthProportional"/>
+        <Label Text="Elapsed Time:" AbsoluteLayout.LayoutBounds="4,60, 100, 50"  />
+
+        <Rectangle BackgroundColor="Black" AbsoluteLayout.LayoutBounds="40,125, 5, 100" />
+        <Rectangle BackgroundColor="Black" AbsoluteLayout.LayoutBounds="35,215, 100, 5" />
+
+    </AbsoluteLayout>
+</ContentPage>
